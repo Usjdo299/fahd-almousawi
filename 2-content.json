@@ -1,0 +1,316 @@
+{
+ "repo": {
+  "owner": "Usjdo299",
+  "name": "fahd-almousawi",
+  "branch": "main"
+ },
+ "hero": {
+  "eyebrow": {
+   "ar": "مدرّس التربية الإسلامية",
+   "en": "Teacher of Islamic Education"
+  },
+  "name": {
+   "ar": "السيد فهد الموسوي",
+   "en": "Sayyid Fahd Al-Mousawi"
+  },
+  "role": {
+   "ar": "بكالوريوس علوم القرآن",
+   "en": "Bachelor's in Quranic Sciences"
+  },
+  "lede": {
+   "ar": "تدريسٌ هادئ ورصين، وخبرة في الإرشاد التربوي والتوعوي والديني، تجمع بين العلم والأخلاق وبناء الإنسان.",
+   "en": "Calm, rigorous teaching, with experience in educational, awareness and religious guidance, joining knowledge, character and the building of the person."
+  },
+  "photo": "portrait.jpg"
+ },
+ "about": {
+  "title": {
+   "ar": "معلّم يرى في الدرس رسالة",
+   "en": "A teacher who treats the lesson as a calling"
+  },
+  "p1": {
+   "ar": "السيد فهد الموسوي مدرّس لمادة التربية الإسلامية، حاصل على شهادة في علوم القرآن، ومعروف بوصفه مدرّسًا أنموذجيًا.",
+   "en": "Sayyid Fahd Al-Mousawi teaches Islamic Education. He holds a degree in Quranic Sciences and is known as an exemplary teacher."
+  },
+  "p2": {
+   "ar": "له خبرة واسعة في الإرشاد التربوي والتوعوي والديني، وفي التدريس.",
+   "en": "He has wide experience in educational, awareness and religious guidance, and in teaching."
+  },
+  "facts": [
+   {
+    "k": {
+     "ar": "التخصص",
+     "en": "Subject"
+    },
+    "v": {
+     "ar": "التربية الإسلامية",
+     "en": "Islamic Education"
+    }
+   },
+   {
+    "k": {
+     "ar": "الشهادة",
+     "en": "Degree"
+    },
+    "v": {
+     "ar": "علوم القرآن",
+     "en": "Quranic Sciences"
+    }
+   },
+   {
+    "k": {
+     "ar": "المرحلة",
+     "en": "Level"
+    },
+    "v": {
+     "ar": "السادس العلمي",
+     "en": "Sixth Scientific (final year)"
+    }
+   },
+   {
+    "k": {
+     "ar": "المدرسة",
+     "en": "School"
+    },
+    "v": {
+     "ar": "مدارس البرهان الأهلية النموذجية",
+     "en": "Al-Burhan Exemplary Private Schools"
+    }
+   },
+   {
+    "k": {
+     "ar": "المكان",
+     "en": "Location"
+    },
+    "v": {
+     "ar": "القرنة، البصرة",
+     "en": "Al-Qurna, Basra"
+    }
+   }
+  ]
+ },
+ "expertise": {
+  "title": {
+   "ar": "ميادين العمل",
+   "en": "Fields of work"
+  },
+  "items": [
+   {
+    "t": {
+     "ar": "التدريس",
+     "en": "Teaching"
+    },
+    "d": {
+     "ar": "تدريس مادة التربية الإسلامية لطلبة السادس العلمي، بخبرة وصفته مدرّسًا أنموذجيًا.",
+     "en": "Teaching Islamic Education to Sixth Scientific students, with the experience of an exemplary teacher."
+    }
+   },
+   {
+    "t": {
+     "ar": "الإرشاد التربوي",
+     "en": "Educational guidance"
+    },
+    "d": {
+     "ar": "خبرة واسعة في الإرشاد التربوي ومتابعة الطلبة.",
+     "en": "Wide experience in educational guidance and student support."
+    }
+   },
+   {
+    "t": {
+     "ar": "التوعية الدينية",
+     "en": "Religious awareness"
+    },
+    "d": {
+     "ar": "خبرة في العمل التوعوي والديني المستند إلى علوم القرآن.",
+     "en": "Experience in awareness and religious work grounded in Quranic sciences."
+    }
+   }
+  ]
+ },
+ "results": {
+  "title": {
+   "ar": "نتائج الطلبة في الامتحان الوزاري",
+   "en": "Student results in the ministerial exam"
+  },
+  "note": {
+   "ar": "بعضٌ من درجات طلابه في الامتحان الوزاري للسادس العلمي، الدور الأول، 2025 – 2026.",
+   "en": "Some of his students' results in the ministerial exam, Sixth Scientific, first round, 2025 – 2026."
+  },
+  "students": [
+   {
+    "name": "جعفر صادق نجم",
+    "score": 100
+   },
+   {
+    "name": "زيد عبدالله جارح",
+    "score": 100
+   },
+   {
+    "name": "هادي خطاب حسن",
+    "score": 100
+   },
+   {
+    "name": "الام مؤيد عبدالواحد",
+    "score": 100
+   },
+   {
+    "name": "ايمان باسم عبيد",
+    "score": 100
+   },
+   {
+    "name": "تقي مؤيد عبدالواحد",
+    "score": 100
+   },
+   {
+    "name": "حوراء أسعد نعيم",
+    "score": 100
+   },
+   {
+    "name": "زينب حسين خالد",
+    "score": 100
+   },
+   {
+    "name": "زينب حمداوي عاتي",
+    "score": 100
+   },
+   {
+    "name": "فاطمة فيصل غازي",
+    "score": 100
+   },
+   {
+    "name": "فاطمة هاني كاظم",
+    "score": 100
+   },
+   {
+    "name": "فواطم غانم باشاغا",
+    "score": 100
+   },
+   {
+    "name": "نوال مؤنس صولاغ",
+    "score": 100
+   },
+   {
+    "name": "نور عاتي دايم",
+    "score": 100
+   },
+   {
+    "name": "نوره صباح فنحان",
+    "score": 100
+   },
+   {
+    "name": "هدى فوزي جيدر",
+    "score": 100
+   },
+   {
+    "name": "حسن علي غازي",
+    "score": 99
+   },
+   {
+    "name": "علي عادل مجوت",
+    "score": 99
+   },
+   {
+    "name": "نرجس جهاد عيسى",
+    "score": 99
+   },
+   {
+    "name": "زهراء رحيم باشاغا",
+    "score": 98
+   },
+   {
+    "name": "نصرالله احمد حمدان",
+    "score": 98
+   },
+   {
+    "name": "ايات رحمان طالب",
+    "score": 98
+   },
+   {
+    "name": "حنين وسام هاني",
+    "score": 98
+   },
+   {
+    "name": "رواء حيدر حميد",
+    "score": 98
+   },
+   {
+    "name": "فاطمة كاظم عبود",
+    "score": 98
+   },
+   {
+    "name": "عبدالله رعد ياسين",
+    "score": 97
+   },
+   {
+    "name": "عمار عبدالزهرة عباس",
+    "score": 97
+   },
+   {
+    "name": "فاطمة علي كريم",
+    "score": 97
+   },
+   {
+    "name": "زهراء رافد حامد",
+    "score": 97
+   },
+   {
+    "name": "حسن عودة جاسم",
+    "score": 96
+   },
+   {
+    "name": "سارة مصطفى عربي",
+    "score": 96
+   },
+   {
+    "name": "فاطمة عبدالحسين كركة",
+    "score": 95
+   },
+   {
+    "name": "حوراء ياسين دعير",
+    "score": 95
+   },
+   {
+    "name": "سنا عدنان عوفي",
+    "score": 95
+   },
+   {
+    "name": "سكينة غانم جاسم",
+    "score": 95
+   },
+   {
+    "name": "فاطمة رمضان عبد",
+    "score": 95
+   }
+  ]
+ },
+ "school": {
+  "title": {
+   "ar": "مدارس البرهان الأهلية النموذجية",
+   "en": "Al-Burhan Exemplary Private Schools"
+  },
+  "text": {
+   "ar": "يدرّس في قسم البنين ضمن كادر السادس العلمي للعام الدراسي 2026 – 2027، في القرنة بمحافظة البصرة.",
+   "en": "He teaches in the boys' section on the Sixth Scientific staff for the 2026 – 2027 academic year, in Al-Qurna, Basra Governorate."
+  }
+ },
+ "posts": {
+  "title": {
+   "ar": "الأخبار",
+   "en": "News"
+  },
+  "items": []
+ },
+ "contact": {
+  "title": {
+   "ar": "التواصل",
+   "en": "Get in touch"
+  },
+  "text": {
+   "ar": "للاستفسار عن الدروس أو للتواصل مع الأستاذ، راسلوه مباشرة.",
+   "en": "For questions about lessons or to reach the teacher, write to him directly."
+  },
+  "whatsapp": "9647703456266",
+  "whatsapp_display": "+964 770 345 6266",
+  "telegram": "Fa1h7d"
+ }
+}
