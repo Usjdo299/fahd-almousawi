@@ -1,9 +1,4 @@
 {
- "repo": {
-  "owner": "Usjdo299",
-  "name": "fahd-almousawi",
-  "branch": "main"
- },
  "hero": {
   "eyebrow": {
    "ar": "مدرّس التربية الإسلامية",
@@ -69,12 +64,12 @@
    },
    {
     "k": {
-     "ar": "المدرسة",
-     "en": "School"
+     "ar": "المدارس",
+     "en": "Schools"
     },
     "v": {
-     "ar": "مدارس البرهان الأهلية النموذجية",
-     "en": "Al-Burhan Exemplary Private Schools"
+     "ar": "البرهان الأهلية النموذجية، وإعدادية الثغر للبنين",
+     "en": "Al-Burhan Exemplary; Al-Thaghr Preparatory (Boys)"
     }
    },
    {
@@ -285,13 +280,31 @@
  },
  "school": {
   "title": {
-   "ar": "مدارس البرهان الأهلية النموذجية",
-   "en": "Al-Burhan Exemplary Private Schools"
+   "ar": "أماكن العمل",
+   "en": "Where he teaches"
   },
-  "text": {
-   "ar": "يدرّس في قسم البنين ضمن كادر السادس العلمي للعام الدراسي 2026 – 2027، في القرنة بمحافظة البصرة.",
-   "en": "He teaches in the boys' section on the Sixth Scientific staff for the 2026 – 2027 academic year, in Al-Qurna, Basra Governorate."
-  }
+  "items": [
+   {
+    "name": {
+     "ar": "مدارس البرهان الأهلية النموذجية",
+     "en": "Al-Burhan Exemplary Private Schools"
+    },
+    "text": {
+     "ar": "قسم البنين، كادر السادس العلمي للعام الدراسي 2026 – 2027، في القرنة بمحافظة البصرة.",
+     "en": "Boys' section, Sixth Scientific staff for the 2026 – 2027 academic year, in Al-Qurna, Basra Governorate."
+    }
+   },
+   {
+    "name": {
+     "ar": "إعدادية الثغر للبنين",
+     "en": "Al-Thaghr Preparatory School for Boys"
+    },
+    "text": {
+     "ar": "يدرّس فيها مادة التربية الإسلامية.",
+     "en": "He also teaches Islamic Education here."
+    }
+   }
+  ]
  },
  "posts": {
   "title": {
