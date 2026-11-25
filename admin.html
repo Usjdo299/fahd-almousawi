@@ -39,38 +39,35 @@ code{background:#eee6d3;padding:1px 6px;direction:ltr;display:inline-block}
 <div class="wrap" id="app"></div>
 <div id="msg"></div>
 <script>
-var REPO=null,SHA=null,C=null,TOKEN=localStorage.getItem('adm_token')||'';
-var LB={hero:'الواجهة الرئيسية',about:'النبذة',expertise:'الخبرات',results:'نتائج الطلبة',school:'المدرسة',posts:'الأخبار والمنشورات',contact:'التواصل'};
+var C=null,PW=sessionStorage.getItem('adm_pw')||'';
+var LB={hero:'الواجهة الرئيسية',about:'النبذة',expertise:'الخبرات',results:'نتائج الطلبة',school:'أماكن العمل',posts:'الأخبار والمنشورات',contact:'التواصل'};
 var KL={eyebrow:'العنوان الصغير',name:'الاسم',role:'الصفة / الشهادة',lede:'النص التعريفي',photo:'مسار الصورة',title:'العنوان',p1:'الفقرة الأولى',p2:'الفقرة الثانية',facts:'المعلومات السريعة',k:'العنوان',v:'القيمة',items:'العناصر',t:'العنوان',d:'الوصف',note:'ملاحظة',text:'النص',whatsapp:'رقم الواتساب (بدون +)',whatsapp_display:'الرقم كما يظهر',telegram:'معرّف تلغرام (بدون @)',date:'التاريخ',body:'النص',image:'الصورة'};
 function msg(t,ok){var m=document.getElementById('msg');m.textContent=t;m.style.display='block';m.style.background=ok===false?'#8a2a2a':'#1d2a26';clearTimeout(msg.t);msg.t=setTimeout(function(){m.style.display='none'},4500)}
-function b64(s){return btoa(unescape(encodeURIComponent(s)))}
-function api(path,opt){opt=opt||{};opt.headers=Object.assign({'Authorization':'Bearer '+TOKEN,'Accept':'application/vnd.github+json'},opt.headers||{});return fetch('https://api.github.com'+path,opt).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.message||r.status);return j})})}
+function api(body){body.password=PW;return fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||r.status);return j})})}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function login(){
- document.getElementById('app').innerHTML='<div class="card"><h2>الدخول</h2><p class="note">الدخول يتم بمفتاح وصول خاص بالمالك (GitHub token) فقط، ولا يُحفظ إلا في هذا المتصفح. من لا يملك المفتاح لا يستطيع التعديل.</p><label>مفتاح الوصول</label><input id="tk" type="password" dir="ltr" autocomplete="off"><p><button class="p" id="go">دخول</button></p><h3>كيف أحصل على المفتاح؟</h3><ol class="note"><li>افتح GitHub ثم Settings ثم Developer settings ثم Fine-grained tokens.</li><li>اختر المستودع <code>fahd-almousawi</code> فقط.</li><li>في Permissions اجعل Contents على Read and write.</li><li>انسخ المفتاح والصقه هنا.</li></ol></div>';
- document.getElementById('go').onclick=function(){TOKEN=document.getElementById('tk').value.trim();if(!TOKEN)return;load()}
+ document.getElementById('save').style.display='none';document.getElementById('logout').style.display='none';
+ document.getElementById('app').innerHTML='<div class="card"><h2>الدخول</h2><p class="note">أدخل كلمة مرور لوحة التحكم.</p><label>كلمة المرور</label><input id="tk" type="password" dir="ltr" autocomplete="current-password"><p><button class="p" id="go">دخول</button></p></div>';
+ var go=function(){PW=document.getElementById('tk').value;if(!PW)return;load()};
+ document.getElementById('go').onclick=go;document.getElementById('tk').onkeydown=function(e){if(e.key==='Enter')go()}
 }
 function load(){
- fetch('content.json?v='+Date.now()).then(function(r){return r.json()}).then(function(c){
-  REPO=c.repo;return api('/repos/'+REPO.owner+'/'+REPO.name+'/contents/content.json?ref='+REPO.branch)}).then(function(f){
-  SHA=f.sha;C=JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g,'')))));
-  localStorage.setItem('adm_token',TOKEN);draw()}).catch(function(e){localStorage.removeItem('adm_token');login();msg('تعذر الدخول: '+e.message,false)})
+ api({action:'check'}).then(function(){sessionStorage.setItem('adm_pw',PW);return fetch('content.json?v='+Date.now()).then(function(r){return r.json()})}).then(function(c){C=c;draw()}).catch(function(e){sessionStorage.removeItem('adm_pw');PW='';login();msg('تعذر الدخول: '+e.message,false)})
 }
 function lbl(k){return KL[k]||k}
 function isBi(o){return o&&typeof o==='object'&&!Array.isArray(o)&&('ar' in o)&&('en' in o)}
+function ctl(path,l,val,dir,long){return long?'<textarea '+dir+' data-p="'+path.join('.')+'.'+l+'">'+esc(val)+'</textarea>':'<input '+dir+' data-p="'+path.join('.')+'.'+l+'">'}
 function field(path,v,k){
- var id='f:'+path.join('.');
  if(isBi(v)){var long=(v.ar||'').length>70||(v.en||'').length>70;
-  function ctl(l,val,dir){return long?'<textarea '+dir+' data-p="'+path.join('.')+'.'+l+'">'+esc(val)+'</textarea>':'<input '+dir+' data-p="'+path.join('.')+'.'+l+'">'}
-  return '<label>'+lbl(k)+'</label><div class="row"><div><small class="note">عربي</small>'+ctl('ar',v.ar,'')+'</div><div><small class="note">English</small>'+ctl('en',v.en,'dir="ltr"')+'</div></div>'}
+  return '<label>'+lbl(k)+'</label><div class="row"><div><small class="note">عربي</small>'+ctl(path,'ar',v.ar,'',long)+'</div><div><small class="note">English</small>'+ctl(path,'en',v.en,'dir="ltr"',long)+'</div></div>'}
  if(Array.isArray(v)){
   if(path.join('.')==='results.students')return studs(path,v);
   var h='<h3>'+lbl(k)+'</h3>';
   v.forEach(function(x,i){h+='<div class="item"><button class="x" data-del="'+path.join('.')+'" data-i="'+i+'">حذف</button>'+(typeof x==='object'?objf(path.concat(i),x):'')+'</div>'});
   return h+'<p><button data-add="'+path.join('.')+'">+ إضافة</button></p>'}
  if(typeof v==='object')return '<h3>'+lbl(k)+'</h3>'+objf(path,v);
- var long=String(v).length>70;
- return '<label>'+lbl(k)+'</label>'+(long?'<textarea data-p="'+path.join('.')+'">':'<input data-p="'+path.join('.')+'" '+(k==='photo'||k==='image'||/whats|tele|date/.test(k)?'dir="ltr" ':'')+'>')+(long?esc(v)+'</textarea>':'')
+ var long2=String(v).length>70,dir=(k==='photo'||k==='image'||/whats|tele|date/.test(k))?'dir="ltr" ':'';
+ return '<label>'+lbl(k)+'</label>'+(long2?'<textarea data-p="'+path.join('.')+'">'+esc(v)+'</textarea>':'<input '+dir+'data-p="'+path.join('.')+'">')
 }
 function objf(path,o){var h='';Object.keys(o).forEach(function(k){h+=field(path.concat(k),o[k],k)});return h}
 function studs(path,v){
@@ -85,32 +82,29 @@ function blank(o){if(isBi(o))return{ar:'',en:''};if(Array.isArray(o))return[];if
 function draw(){
  var h='';
  ['hero','about','expertise','results','school','posts','contact'].forEach(function(k){
-  h+='<div class="card"><h2>'+LB[k]+'</h2>'+objf([k],C[k])+(k==='hero'?'<h3>الصورة الشخصية</h3><input type="file" id="ph" accept="image/*"><img class="prev" src="'+esc(C.hero.photo)+'">':'')+(k==='posts'?'<p class="note">لكل منشور يمكنك رفع صورة من الزر أدناه بعد إضافته، ثم الصق المسار الناتج في حقل الصورة. أو استخدم زر رفع الصورة العام.</p><input type="file" id="up" accept="image/*"><p class="note" id="upr"></p>':'')+'</div>'});
+  h+='<div class="card"><h2>'+LB[k]+'</h2>'+objf([k],C[k])+(k==='hero'?'<h3>تغيير الصورة الشخصية</h3><input type="file" id="ph" accept="image/*"><img class="prev" src="'+esc(C.hero.photo)+'">':'')+(k==='posts'?'<h3>رفع صورة لمنشور</h3><p class="note">ارفع الصورة ثم الصق المسار الناتج في حقل الصورة داخل المنشور.</p><input type="file" id="up" accept="image/*"><p class="note" id="upr"></p>':'')+'</div>'});
  document.getElementById('app').innerHTML=h;fill();
- document.getElementById('save').style.display='';var lo=document.getElementById('logout');lo.style.display='';
+ document.getElementById('save').style.display='';document.getElementById('logout').style.display='';
  bind()
 }
 function bind(){
  var app=document.getElementById('app');
  app.onclick=function(e){var t=e.target;sync();
   if(t.dataset.del){var a=getp(C,t.dataset.del);a.splice(+t.dataset.i,1);draw()}
-  else if(t.dataset.add!==undefined&&t.dataset.add){var a=getp(C,t.dataset.add);var tpl=a.length?blank(a[0]):(t.dataset.add==='posts.items'?{date:new Date().toISOString().slice(0,10),title:{ar:'',en:''},body:{ar:'',en:''},image:''}:{});if(t.dataset.add==='posts.items')tpl.date=new Date().toISOString().slice(0,10);a.unshift(tpl);draw()}
+  else if(t.dataset.add){var a=getp(C,t.dataset.add);var tpl=a.length?blank(a[0]):(t.dataset.add==='posts.items'?{date:'',title:{ar:'',en:''},body:{ar:'',en:''},image:''}:{});if(t.dataset.add==='posts.items')tpl.date=new Date().toISOString().slice(0,10);a.unshift(tpl);draw()}
   else if(t.dataset.sd!==undefined){C.results.students.splice(+t.dataset.sd,1);draw()}
   else if(t.id==='sadd'){C.results.students.push({name:'',score:100});draw()}
  };
- document.getElementById('ph').onchange=function(){upload(this.files[0],'img/portrait-'+Date.now()+'.jpg',function(p){sync();C.hero.photo=p;draw();msg('تم رفع الصورة، اضغط حفظ ونشر')})};
- document.getElementById('up').onchange=function(){var f=this.files[0];upload(f,'img/posts/'+Date.now()+'.jpg',function(p){document.getElementById('upr').innerHTML='مسار الصورة: <code>'+p+'</code>'})};
+ document.getElementById('ph').onchange=function(){upload(this.files[0],function(p){sync();C.hero.photo=p;draw();msg('تم رفع الصورة، اضغط حفظ ونشر')})};
+ document.getElementById('up').onchange=function(){upload(this.files[0],function(p){document.getElementById('upr').innerHTML='مسار الصورة: <code>'+p+'</code>'})};
 }
 function shrink(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var m=1600,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.86).split(',')[1])};im.src=r.result};r.readAsDataURL(file)}
-function upload(file,path,cb){if(!file)return;msg('جارٍ رفع الصورة...');shrink(file,function(b){
- api('/repos/'+REPO.owner+'/'+REPO.name+'/contents/'+path,{method:'PUT',body:JSON.stringify({message:'Upload image',content:b,branch:REPO.branch})}).then(function(){cb(path)}).catch(function(e){msg('فشل الرفع: '+e.message,false)})})}
+function upload(file,cb){if(!file)return;msg('جارٍ رفع الصورة...');shrink(file,function(b){api({action:'upload',data:b}).then(function(j){cb(j.path)}).catch(function(e){msg('فشل الرفع: '+e.message,false)})})}
 document.getElementById('save').onclick=function(){
- sync();var btn=this;btn.disabled=true;
- C.posts.items=C.posts.items||[];
- api('/repos/'+REPO.owner+'/'+REPO.name+'/contents/content.json?ref='+REPO.branch).then(function(f){
-  return api('/repos/'+REPO.owner+'/'+REPO.name+'/contents/content.json',{method:'PUT',body:JSON.stringify({message:'Update content',content:b64(JSON.stringify(C,null,1)),sha:f.sha,branch:REPO.branch})})}).then(function(){msg('تم الحفظ. يظهر التعديل في الموقع خلال دقيقة تقريبًا.')}).catch(function(e){msg('فشل الحفظ: '+e.message,false)}).then(function(){btn.disabled=false})};
-document.getElementById('logout').onclick=function(){localStorage.removeItem('adm_token');location.reload()};
-if(TOKEN)load();else login();
+ sync();var btn=this;btn.disabled=true;C.posts.items=C.posts.items||[];
+ api({action:'save',content:C}).then(function(){msg('تم الحفظ. يظهر التعديل في الموقع خلال دقيقة تقريبًا.')}).catch(function(e){msg('فشل الحفظ: '+e.message,false)}).then(function(){btn.disabled=false})};
+document.getElementById('logout').onclick=function(){sessionStorage.removeItem('adm_pw');location.reload()};
+if(PW)load();else login();
 </script>
 </body>
 </html>
